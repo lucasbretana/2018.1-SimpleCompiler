@@ -1,3 +1,5 @@
+package legacy;
+
 class ArvoreSintatica{}
 
 class Exp extends ArvoreSintatica{}

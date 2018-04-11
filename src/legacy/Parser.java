@@ -1,3 +1,5 @@
+package legacy;
+
 class Parser{
 
 	AnaliseLexica scanner;
