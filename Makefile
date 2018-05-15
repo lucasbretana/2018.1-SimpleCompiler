@@ -58,7 +58,7 @@ all: $(NEW)
 CLASS_NEW = Compiler \
 		LexicalAnalyzer \
 		Token \
-		CodeGen \
+		Interpreter \
 		Div \
 		Exp \
 		Mult \
