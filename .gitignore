@@ -1,3 +1,8 @@
+*.swp
+*.swo
+
+tags
+#
 # Compiled class file
 *.class
 

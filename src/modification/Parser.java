@@ -5,18 +5,23 @@ import modification.Operator;
 import modification.ParseTree;
 import modification.TokenType;
 import modification.Token;
+import modification.Div;
+import modification.Mult;
+import modification.Sub;
+import modification.Sum;
+import modification.Num;
 
 public class Parser {
 
   LexicalAnalyzer scanner;
 
 
-  Parser(LexicalAnalyzer s) throws IllegalArgumentException {
+  public Parser(LexicalAnalyzer s) throws IllegalArgumentException {
     if(s == null) throw new IllegalArgumentException("LexicalAnalyzer cannot be null");
     scanner = s;
   }
 
-  ParseTree parseProg() throws Exception {
+  public ParseTree parseProg() throws Exception {
 
     ParseTree code = exp();
     Token current = scanner.getNextToken();
@@ -62,7 +67,7 @@ public class Parser {
 
   }
 
-  Operator op() throws Exception {
+  public Operator op() throws Exception {
 
     Token tokenCur = scanner.getNextToken();
     switch(tokenCur.token){
@@ -70,6 +75,10 @@ public class Parser {
         return new Sum(null,null);
       case MUL:
         return new Mult(null,null);
+      case MIN:
+        return new Sub(null, null);
+      case DIV:
+        return new Div(null, null);
       default: 
     }
     return null;

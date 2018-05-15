@@ -3,10 +3,16 @@ VERSION = v1.0
 # Common commands
 JC = javac
 JC_FLAG = -Xlint:all -Xlint:unchecked -Xdiags:verbose
+
 JD = javadoc
 JD_FLAG =
-JR = jar
-JR_FLAG =
+
+JR = java
+JR_FLAG = 
+
+JP = jar
+JP_FLAG =
+
 RM = rm
 RM_FLAG = -rf
 
@@ -41,7 +47,7 @@ OLD = legacy
 NEW = modification
 
 ################################################################################
-Main-Class = $(NEW).Main
+Main-Class = $(NEW).Compiler
 
 all: $(NEW)
 	@echo "$(NOTE)Done$(NC)"
@@ -52,11 +58,22 @@ all: $(NEW)
 CLASS_NEW = Compiler \
 		LexicalAnalyzer \
 		Token \
-		TokenType
+		CodeGen \
+		Div \
+		Exp \
+		Mult \
+		Num \
+		Operator \
+		Parser \
+		ParseTree \
+		Sub \
+		Sum \
+		Token \
+		TokenType 
 
 # HERE
 $(NEW): $(addsuffix .java, $(addprefix $(SRC)/$(NEW)/, $(CLASS_NEW)))
-	$(JC) $(JC_FLAG) -cp $(CP) $(addsuffix .java, $(addprefix $(SRC)/$(NEW)/, $(CLASS_NEW)))
+	$(JC) $(JC_FLAG) -cp $(CP) $(addsuffix .java, $(addprefix $(SRC)/$(NEW)/, $(CLASS_NEW))) -d $(BIN)
 	@echo "$(NOTE)Compiled all legacy code$(NC)"
 
 #######################################################################################################################################################
@@ -73,11 +90,17 @@ $(OLD): $(addsuffix .java, $(addprefix $(SRC)/$(OLD)/, $(CLASS_OLD)))
 	@echo "$(NOTE)Compiled all legacy code$(NC)"
 
 #######################################################################################################################################################
+# run some code
+#test:
+#	$(JR) $(JR_FLAG) -cp $(BIN) $(BIN)/$(NEW).$(Main-Class) $1
+
+#######################################################################################################################################################
+
 documentation: $(ALL_CLASSES)
 	$(JD) $(JD_FLAG) -cp $(LIBRARIES):.:$(BIN) $(ALL_CLASSES) -d $(DOC)/
 
-jarfile: clean all documentation
-	$(JR) $(JR_FLAG)cfm $(TARGET)_$(VERSION).jar $(JR_MANIFEST) -C $(BIN)/ . $(INCLUDE)
+#jarfile: clean all documentation
+#	$(JP) $(JP_FLAG)cfm $(TARGET)_$(VERSION).jar $(JR_MANIFEST) -C $(BIN)/ . $(INCLUDE)
 
 clean:
 	$(RM) $(RM_FLAG) $(DOC)/* || true

@@ -28,8 +28,8 @@ class Compiler{
       String codigo = backend.generate(arv);
       System.out.println(codigo);
 
-    }catch(Exception e)
-    {     
+    }catch(Exception e) {     
+      e.printStackTrace();
       System.out.println("Erro de compilação:\n" + e);
     }
 
